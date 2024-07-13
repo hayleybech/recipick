@@ -25,7 +25,7 @@
                             <!-- Meta -->
                             <div class="flex justify-between">
                                 <div class="text-sm text-gray-500">
-
+                                    {{ mealPlan.recipes_count }} Meals
                                 </div>
 
                                 <div class="text-sm text-gray-500">

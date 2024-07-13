@@ -11,6 +11,10 @@
 
                 <MealPlanForm />
 
+                <jet-section-border />
+
+                <MealPlanRecipesForm :all-recipes="recipes" />
+
             </div>
         </div>
     </app-layout>
@@ -19,11 +23,16 @@
 <script>
 import AppLayout from '@/Layouts/AppLayout'
 import MealPlanForm from "@/Pages/MealPlans/MealPlanForm";
+import MealPlanRecipesForm from "@/Pages/MealPlans/MealPlanRecipesForm";
+import JetSectionBorder from "@/Jetstream/SectionBorder";
 
 export default {
     components: {
+        MealPlanRecipesForm,
         AppLayout,
+        JetSectionBorder,
         MealPlanForm,
     },
+    props: ['recipes'],
 }
 </script>

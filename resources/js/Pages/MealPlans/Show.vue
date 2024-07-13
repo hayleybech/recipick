@@ -41,7 +41,7 @@
         <div>
             <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
 
-                <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <div class="bg-white shadow overflow-hidden sm:rounded-lg mb-10">
                     <div class="px-4 py-5 sm:px-6">
                         <h3 class="text-lg leading-6 font-medium text-gray-900">
                             {{ mealPlan.name }}
@@ -51,6 +51,26 @@
                         </p>
                     </div>
                 </div>
+
+                <ul class="grid grid-cols-4 gap-4">
+                    <li v-for="recipe in mealPlan.recipes" :key="recipe.id" class="flex flex-col justify-between shadow-md sm:rounded-lg p-4 bg-white">
+                        <!-- Content -->
+                        <div>
+                            <inertia-link :href="route('recipes.show', recipe)">{{ recipe.name }}</inertia-link><br>
+                            <div class="text-sm text-gray-500 mb-3">{{ recipe.description }}</div>
+                        </div>
+                        <!-- Meta -->
+                        <div class="flex justify-between">
+                            <div class="text-sm text-gray-500">
+                                {{ recipe.preparation_time ?? '?' }} | {{ recipe.cooking_time ?? '?' }} min
+                            </div>
+
+                            <div class="text-sm text-gray-500">
+                                {{ recipe.pivot.servings }} servings
+                            </div>
+                        </div>
+                    </li>
+                </ul>
 
             </div>
         </div>

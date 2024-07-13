@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MealPlanRequest;
 use App\Models\MealPlan;
+use App\Models\Recipe;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -16,18 +17,31 @@ class MealPlanController extends Controller
         return Inertia::render('MealPlans/Index', [
             'mealPlans'   => MealPlan::query()
                 ->orderByDesc('start_date')
+                ->withCount('recipes')
                 ->get(),
         ]);
     }
 
     public function create(): Response
     {
-        return Inertia::render('MealPlans/Create');
+        return Inertia::render('MealPlans/Create', [
+            'recipes'   => Recipe::all(),
+        ]);
     }
 
     public function store(MealPlanRequest $request): RedirectResponse
     {
-        $mealPlan = MealPlan::create($request->validated());
+        $mealPlan = MealPlan::create($request->except('recipes'));
+
+        // @todo clean up
+        $recipes_unkeyed = $request->input('recipes');
+        $recipes = [];
+        foreach($recipes_unkeyed as $recipe){
+            $recipes[$recipe['id']] = [
+                'servings' => $recipe['servings'],
+            ];
+        }
+        $mealPlan->recipes()->attach($recipes);
 
         $this->banner('Meal plan created.');
 
@@ -36,6 +50,8 @@ class MealPlanController extends Controller
 
     public function show(MealPlan $mealPlan): Response
     {
+        $mealPlan->load('recipes');
+
         return Inertia::render('MealPlans/Show', [
             'mealPlan'   => $mealPlan,
         ]);
@@ -50,7 +66,17 @@ class MealPlanController extends Controller
 
     public function update(MealPlanRequest $request, MealPlan $mealPlan): RedirectResponse
     {
-        $mealPlan->update($request->validated());
+        $mealPlan->update($request->except('recipes'));
+
+        // @todo clean up
+        $recipes_unkeyed = $request->input('recipes');
+        $recipes = [];
+        foreach($recipes_unkeyed as $recipe){
+            $recipes[$recipe['id']] = [
+                'servings' => $recipe['servings'],
+            ];
+        }
+        $mealPlan->recipes()->sync($recipes);
 
         $this->banner('Meal plan saved.');
 

@@ -22,8 +22,11 @@ class MealPlanRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => ['required', 'max:255'],
-            'start_date'    => ['required', 'date', 'after_or_equal:today'],
+            'name'                  => ['required', 'max:255'],
+            'start_date'            => ['required', 'date', 'after_or_equal:today'],
+            'recipes'               => ['array'],
+            'recipes.*.id'          => ['required', 'numeric', 'exists:recipes'],
+            'recipes.*.servings'    => ['required', 'numeric', 'min:1', 'max:255'],
         ];
     }
 }

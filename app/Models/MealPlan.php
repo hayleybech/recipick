@@ -5,6 +5,7 @@ namespace App\Models;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
 
 class MealPlan extends Model
@@ -27,5 +28,12 @@ class MealPlan extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return (new Carbon($date))->format('jS M, Y');
+    }
+
+    public function recipes(): BelongsToMany
+    {
+        return $this->belongsToMany(Recipe::class)
+            ->withPivot(['servings'])
+            ->withTimestamps();
     }
 }

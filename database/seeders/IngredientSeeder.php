@@ -2,20 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\Recipe;
-use App\Models\RecipeItem;
+use App\Models\Ingredient;
 use Illuminate\Database\Seeder;
 
-class RecipeSeeder extends Seeder
+class IngredientSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Recipe::factory()
-            ->count(100)
-            ->hasItems(10)
+        Ingredient::factory()
+            ->count(500)
             ->create();
     }
 }
