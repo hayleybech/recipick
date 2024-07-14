@@ -95,7 +95,7 @@
     import JetInputError from '@/Jetstream/InputError'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
     import {useForm} from "@inertiajs/vue3";
-    import { route } from 'ziggy-js';Z
+    import { route } from 'ziggy-js';
 
     export default {
         props: ['sessions'],

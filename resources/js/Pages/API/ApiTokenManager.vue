@@ -177,7 +177,7 @@
     import JetLabel from '@/Jetstream/Label'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
     import JetSectionBorder from '@/Jetstream/SectionBorder'
-    import { route } from 'ziggy-js';Z
+    import { route } from 'ziggy-js';
     import {useForm} from "@inertiajs/vue3";
 
     export default {
