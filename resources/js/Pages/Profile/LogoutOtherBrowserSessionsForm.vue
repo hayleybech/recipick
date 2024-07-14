@@ -94,6 +94,8 @@
     import JetInput from '@/Jetstream/Input'
     import JetInputError from '@/Jetstream/InputError'
     import JetSecondaryButton from '@/Jetstream/SecondaryButton'
+    import {useForm} from "@inertiajs/vue3";
+    import { route } from 'ziggy-js';Z
 
     export default {
         props: ['sessions'],
@@ -112,7 +114,7 @@
             return {
                 confirmingLogout: false,
 
-                form: this.$inertia.form({
+                form: useForm({
                     password: '',
                 })
             }

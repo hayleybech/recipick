@@ -142,6 +142,8 @@ import AppLayout from '@/Layouts/AppLayout'
 import JetDangerButton from "@/Jetstream/DangerButton";
 import JetConfirmationModal from "@/Jetstream/ConfirmationModal";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton";
+import { route } from 'ziggy-js';
+import {useForm} from "@inertiajs/vue3";
 
 export default {
     props: ['recipe'],
@@ -157,7 +159,7 @@ export default {
         return {
             confirmingRecipeDeletion: false,
 
-            form: this.$inertia.form(),
+            form: useForm({}),
         }
     },
     methods: {
