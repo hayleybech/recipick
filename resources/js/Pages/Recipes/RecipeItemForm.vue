@@ -77,6 +77,8 @@ import JetInput from "@/Jetstream/Input";
 import JetInputError from "@/Jetstream/InputError";
 import JetLabel from "@/Jetstream/Label";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton";
+import { route } from 'ziggy-js';
+import {useForm} from "@inertiajs/vue3";
 
 export default {
     name: "RecipeItemForm",
@@ -90,7 +92,7 @@ export default {
     },
     data() {
         return {
-            form: this.$inertia.form({
+            form: useForm({
                 ingredient_name: this?.item?.ingredient?.name,
                 preparation: this?.item?.preparation,
                 quantity: this?.item?.quantity,
@@ -103,19 +105,19 @@ export default {
     methods: {
         store() {
             if(this.item){
-                this.form.put(this.route('recipes.items.update', [this.recipe, this.item]), {
+                this.form.put(route('recipes.items.update', [this.recipe, this.item]), {
                     preserveScroll: true,
                 })
                 this.editEnabled = false;
             } else {
-                this.form.post(this.route('recipes.items.store', this.recipe), {
+                this.form.post(route('recipes.items.store', this.recipe), {
                     preserveScroll: true,
                 });
                 this.form.reset();
             }
         },
         destroy(){
-            this.form.delete(this.route('recipes.items.destroy', [this.recipe, this.item]), {
+            this.form.delete(route('recipes.items.destroy', [this.recipe, this.item]), {
                 preserveScroll: true,
             });
         }

@@ -119,6 +119,8 @@ import JetInput from "@/Jetstream/Input";
 import JetInputError from "@/Jetstream/InputError";
 import JetLabel from "@/Jetstream/Label";
 import JetSecondaryButton from "@/Jetstream/SecondaryButton";
+import { route } from 'ziggy-js';
+import {useForm} from "@inertiajs/vue3";
 
 export default {
     name: "RecipeForm",
@@ -134,7 +136,7 @@ export default {
     props: ['recipe'],
     data() {
         return {
-            form: this.$inertia.form({
+            form: useForm({
                 name: this?.recipe?.name,
                 description: this?.recipe?.description,
                 preparation_time: this?.recipe?.preparation_time,
@@ -148,9 +150,9 @@ export default {
     methods: {
         store() {
             if(this.recipe){
-                this.form.put(this.route('recipes.update', this.recipe))
+                this.form.put(route('recipes.update', this.recipe))
             } else {
-                this.form.post(this.route('recipes.store'))
+                this.form.post(route('recipes.store'))
             }
         },
     }

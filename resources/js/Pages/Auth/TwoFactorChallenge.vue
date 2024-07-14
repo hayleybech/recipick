@@ -53,6 +53,8 @@
     import JetInput from '@/Jetstream/Input'
     import JetLabel from '@/Jetstream/Label'
     import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import {useForm} from "@inertiajs/vue3";
+    import { route } from 'ziggy-js';
 
     export default {
         components: {
@@ -67,7 +69,7 @@
         data() {
             return {
                 recovery: false,
-                form: this.$inertia.form({
+                form: useForm({
                     code: '',
                     recovery_code: '',
                 })
@@ -90,7 +92,7 @@
             },
 
             submit() {
-                this.form.post(this.route('two-factor.login'))
+                this.form.post(route('two-factor.login'))
             }
         }
     }

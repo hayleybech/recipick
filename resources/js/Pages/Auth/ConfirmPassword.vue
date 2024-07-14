@@ -32,6 +32,8 @@
     import JetInput from '@/Jetstream/Input'
     import JetLabel from '@/Jetstream/Label'
     import JetValidationErrors from '@/Jetstream/ValidationErrors'
+    import {useForm} from "@inertiajs/vue3";
+    import { route } from 'ziggy-js';
 
     export default {
         components: {
@@ -45,7 +47,7 @@
 
         data() {
             return {
-                form: this.$inertia.form({
+                form: useForm({
                     password: '',
                 })
             }
@@ -53,7 +55,7 @@
 
         methods: {
             submit() {
-                this.form.post(this.route('password.confirm'), {
+                this.form.post(route('password.confirm'), {
                     onFinish: () => this.form.reset(),
                 })
             }

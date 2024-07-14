@@ -19,7 +19,7 @@
                         <li v-for="recipe in recipes" :key="recipe.id" class="flex flex-col justify-between shadow-md sm:rounded-lg p-4 bg-white">
                             <!-- Content -->
                             <div>
-                                <inertia-link :href="route('recipes.show', recipe)">{{ recipe.name }}</inertia-link><br>
+                                <Link :href="route('recipes.show', recipe)">{{ recipe.name }}</Link><br>
                                 <div class="text-sm text-gray-500 mb-3">{{ recipe.description }}</div>
                             </div>
                             <!-- Meta -->
@@ -42,12 +42,14 @@
 
 <script>
 import AppLayout from '@/Layouts/AppLayout'
+import {Link} from "@inertiajs/vue3";
 
 export default {
     props: ['recipes'],
 
     components: {
         AppLayout,
+        Link
     },
 }
 </script>
